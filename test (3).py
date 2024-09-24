@@ -17,10 +17,10 @@ country_data = data[['Country', 'Project name']].dropna(subset=['Country'])
 project_count_by_country = country_data.groupby('Country').size().reset_index(name='Number of Projects')
 
 # Load world shapefile using Geopandas
-world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+world = gpd.read_file('ne_110m_admin_0_countries')
 
 # Merge world geometries with project counts
-world = world.merge(project_count_by_country, how='left', left_on='name', right_on='Country')
+world = world.merge(project_count_by_country, how='left', left_on='ADM0_A3', right_on='Country')
 
 # Fill NaN values with 0 for countries with no projects
 world['Number of Projects'] = world['Number of Projects'].fillna(0)
