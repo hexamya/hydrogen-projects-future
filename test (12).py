@@ -132,3 +132,4 @@ plt.xlabel('Samples')
 plt.ylabel('Distance')
 plt.show()
 
+df.to_csv("cluster.csv", index=False)
