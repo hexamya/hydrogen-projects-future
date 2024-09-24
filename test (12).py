@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.impute import SimpleImputer
 import seaborn as sns
@@ -34,25 +35,25 @@ print(df_imputed.head())
 
 
 features = [
-    'Country',
+    # 'Country',
     'Status',
     'Technology',
     'Technology_electricity',
     'Product',
-    'EndUse_Refining',
-    'EndUse_Ammonia',
-    'EndUse_Methanol',
-    'EndUse_Iron&Steel',
-    'EndUse_Other Ind',
-    'EndUse_Mobility',
-    'EndUse_Power',
-    'EndUse_Grid inj.',
-    'EndUse_CHP',
-    'EndUse_Domestic heat',
-    'EndUse_Biofuels',
-    'EndUse_Synfuels',
-    'EndUse_CH4 grid inj.',
-    'EndUse_CH4 mobility',
+    # 'EndUse_Refining',
+    # 'EndUse_Ammonia',
+    # 'EndUse_Methanol',
+    # 'EndUse_Iron&Steel',
+    # 'EndUse_Other Ind',
+    # 'EndUse_Mobility',
+    # 'EndUse_Power',
+    # 'EndUse_Grid inj.',
+    # 'EndUse_CHP',
+    # 'EndUse_Domestic heat',
+    # 'EndUse_Biofuels',
+    # 'EndUse_Synfuels',
+    # 'EndUse_CH4 grid inj.',
+    # 'EndUse_CH4 mobility',
 
     'Capacity_MWel',
     'Capacity_Nm³ H₂/h',
@@ -67,11 +68,30 @@ X = df_imputed[features]
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-# Define the number of clusters
-n_clusters = 3  # This is an adjustable parameter
+# Define a function to plot silhouette scores
+def plot_silhouette_scores(X, max_clusters=10):
+    silhouette_scores = []
+    cluster_range = range(2, max_clusters + 1)
+    for n_clusters in cluster_range:
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+        kmeans.fit(X)
+        score = silhouette_score(X, kmeans.labels_)
+        silhouette_scores.append(score)
+
+    plt.plot(cluster_range, silhouette_scores, 'bx-')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('Silhouette score')
+    plt.title('Silhouette Scores for k-means clustering')
+    plt.show()
+
+# Plot silhouette scores to find the optimal number of clusters for k-means
+plot_silhouette_scores(X, max_clusters=10)
+
+# Optimal number of clusters found from silhouette scores
+optimal_clusters = 3  # This could be adjusted based on silhouette scores
 
 # Initialize and fit the k-means model
-kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+kmeans = KMeans(n_clusters=optimal_clusters, random_state=42)
 clusters = kmeans.fit_predict(X)
 
 # Add the cluster assignments back to the dataset
@@ -84,12 +104,12 @@ print(df_imputed.head())
 # Visualize the clusters (using two principal components for simplicity)
 from sklearn.decomposition import PCA
 
-pca = PCA(n_components=4)
+pca = PCA(n_components=2)
 pca_result = pca.fit_transform(X)
 df_imputed['PCA1'] = pca_result[:, 0]
 df_imputed['PCA2'] = pca_result[:, 1]
 plt.figure(figsize=(10, 6))
-for cluster in range(n_clusters):
+for cluster in range(optimal_clusters):
     cluster_data = df_imputed[df_imputed['Cluster'] == cluster]
     plt.scatter(cluster_data['PCA1'], cluster_data['PCA2'], label=f"Cluster {cluster}")
 
