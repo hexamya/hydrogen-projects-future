@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.impute import SimpleImputer
+import seaborn as sns
 
 # Load the dataset
 df = pd.read_csv('hydrogen_projects.csv')
@@ -33,25 +34,25 @@ print(df_imputed.head())
 
 
 features = [
-    # 'Country',
+    'Country',
     'Status',
     'Technology',
     'Technology_electricity',
     'Product',
-    # 'EndUse_Refining',
-    # 'EndUse_Ammonia',
-    # 'EndUse_Methanol',
-    # 'EndUse_Iron&Steel',
-    # 'EndUse_Other Ind',
-    # 'EndUse_Mobility',
-    # 'EndUse_Power',
-    # 'EndUse_Grid inj.',
-    # 'EndUse_CHP',
-    # 'EndUse_Domestic heat',
-    # 'EndUse_Biofuels',
-    # 'EndUse_Synfuels',
-    # 'EndUse_CH4 grid inj.',
-    # 'EndUse_CH4 mobility',
+    'EndUse_Refining',
+    'EndUse_Ammonia',
+    'EndUse_Methanol',
+    'EndUse_Iron&Steel',
+    'EndUse_Other Ind',
+    'EndUse_Mobility',
+    'EndUse_Power',
+    'EndUse_Grid inj.',
+    'EndUse_CHP',
+    'EndUse_Domestic heat',
+    'EndUse_Biofuels',
+    'EndUse_Synfuels',
+    'EndUse_CH4 grid inj.',
+    'EndUse_CH4 mobility',
 
     'Capacity_MWel',
     'Capacity_Nm³ H₂/h',
@@ -75,6 +76,7 @@ clusters = kmeans.fit_predict(X)
 
 # Add the cluster assignments back to the dataset
 df_imputed['Cluster'] = clusters
+df["Cluster"] = clusters
 
 # Display the first few rows of the dataset with cluster assignments
 print(df_imputed.head())
@@ -86,7 +88,6 @@ pca = PCA(n_components=4)
 pca_result = pca.fit_transform(X)
 df_imputed['PCA1'] = pca_result[:, 0]
 df_imputed['PCA2'] = pca_result[:, 1]
-
 plt.figure(figsize=(10, 6))
 for cluster in range(n_clusters):
     cluster_data = df_imputed[df_imputed['Cluster'] == cluster]
@@ -97,3 +98,37 @@ plt.ylabel('PCA Component 2')
 plt.title('Clusters Visualization')
 plt.legend()
 plt.show()
+
+
+#
+plt.figure(figsize=(12, 12))
+sns.pairplot(
+    df_imputed[[
+        'Country',
+        'Status',
+        'Technology',
+        'Technology_electricity',
+        'Product',
+        'Cluster'
+    ]],
+    hue="Cluster"
+)
+plt.title('Pair plot Visualization')
+plt.show()
+
+
+
+#
+from scipy.cluster.hierarchy import dendrogram, linkage
+
+# Generate linkage matrix
+Z = linkage(X, 'ward')
+
+# Plot dendrogram
+plt.figure(figsize=(10, 6))
+dendrogram(Z)
+plt.title('Hierarchical Clustering Dendrogram')
+plt.xlabel('Samples')
+plt.ylabel('Distance')
+plt.show()
+
