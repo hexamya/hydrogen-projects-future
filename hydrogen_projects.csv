@@ -572,7 +572,7 @@ HUN",2030,,Concept,Other Electrolysis,Unknown PtX,Dedicated renewable,Others/Var
 934,SunLine Palms Springs,USA,2018,,Operational,PEM,,Other/Unknown,,H2,,,,,,1,,,,,,,,,2MW,2,385,0.3,,385,[73],0.57
 936,H2 Green Steel (H2GS) ,SWE,2025,,FID/Construction,ALK,,Dedicated renewable,Hydropower,H2,,,,1,,,,,,,,,,,800MW - 2.5 Mt steel,800,173913,135.6,,173913,[735] [736][1400][1439],0.8
 937,"New York Science, Technology and Advanced Manufacturing Park",USA,2024,,FID/Construction,PEM,,Dedicated renewable,Hydropower,H2,,,,,,1,,,,,,,,,120MW,120,23077,18,,23077,[738][1020][1136],0.8
-938,Abanto Technology Park,ESP,2023,,Operational,ALk,,Dedicated renewable,Unknown,H2,1,,,,,1,,,,,,,,,2.5MW,2.5,543,0.4,,543,[739] [757],0.5
+938,Abanto Technology Park,ESP,2023,,Operational,ALK,,Dedicated renewable,Unknown,H2,1,,,,,1,,,,,,,,,2.5MW,2.5,543,0.4,,543,[739] [757],0.5
 939,HyDeal Ambition,"ESP
 FRA",2030,,Concept,Other Electrolysis,Unknown PtX,Dedicated renewable,Others/Various,H2,,,,,1,1,,1,,,,,,,67GW,,0,0,,0,[758],0.5
 940,Boryeong LNG Terminal,KOR,2025,,Feasibility study,NG w CCUS,Unknown technology,,,H2,,,,,,,,,,,,,,,250 kt H2/y - 0.15 Mt CO2/,,320661,250,150000,18806,[741] [742],0.9
@@ -1955,7 +1955,7 @@ Onuba Project",ESP,2030,,Concept,Other Electrolysis,Unknown PtX,Other/Unknown,Un
 2501,Vanadis Fuels,FIN,2029,,Feasibility study,Other Electrolysis,Unknown PtX,Grid,,MeOH,,,1,,,,,,,,,,,,400kt MeOH/y,441.7277205,98162,77,,98162,[2092],0.57
 2502,Acme - Port of Victoria,USA,2027,,Concept,Other Electrolysis,Unknown PtX,Grid,,Ammonia,,1,,,,,,,,,,,,,1.2Mt NH3/y (production),2188,486249,379,,486249,[2093],0.57
 2503,Gaznat methanation project,CHE,2023,,Operational,ALK,,Dedicated renewable,Solar PV,CH4,,,,,,,,,,,,,1,,0.5MW,0.5,109,0.1,,109,[2096],0.3
-2504,HYBRIT expansion,SWE,2030,,Concept,Other electrolysis,,Grid,,H2,,,,1,,,,,,,,,,,2.7 Mt DRI,500,111111,86.6,,111111,[2099],0.57
+2504,HYBRIT expansion,SWE,2030,,Concept,Other Electrolysis,,Grid,,H2,,,,1,,,,,,,,,,,2.7 Mt DRI,500,111111,86.6,,111111,[2099],0.57
 2505,H2 Green Steel (H2GS) ,SWE,2030,,Concept,Other Electrolysis,Unknown PtX,Dedicated renewable,Hydropower,H2,,,,1,,,,,,,,,,,5Mt Steel,800,177778,138.6,,177778,[2100],0.8
 2506,Aboriginal Ammonia project - East Kimberley Clean Energy project,AUS,2028,,Feasibility study,Other Electrolysis,Unknown PtX,Dedicated renewable,Others/Various,Ammonia,,1,,,,,,,,1,,,,,250 kt NH3 production,259.8391981,57742,45,,57742,[2103],0.5
 2507,Amp Energy project,AUS,2028,,Concept,Other Electrolysis,Unknown PtX,Dedicated renewable,Unknown,Ammonia,,1,,,,,,,,,,,,,5GW,5000,1111111,866.3,,1111111,[2104],0.5
