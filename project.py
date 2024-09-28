@@ -8,14 +8,14 @@ import seaborn as sns
 
 
 
-df = pd.read_csv('project/hydrogen_projects.csv')
+df = pd.read_csv('hydrogen_projects.csv')
 
-df.columns
+# df.columns
 
 df['Date online'] = pd.to_datetime(df['Date online'], errors='coerce', format="%Y")
-df['IEA zero-carbon estimated normalized capacity\n[Nm³ H₂/hour]'] = pd.to_numeric(df['IEA zero-carbon estimated normalized capacity\n[Nm³ H₂/hour]'], errors='coerce')
+df['zero-carbon estimated normalized capacity [Nm³ H₂/hour]'] = pd.to_numeric(df['zero-carbon estimated normalized capacity [Nm³ H₂/hour]'], errors='coerce')
 
-df = df.dropna(subset=['Date online', 'Technology', 'Country', 'IEA zero-carbon estimated normalized capacity\n[Nm³ H₂/hour]'])
+df = df.dropna(subset=['Date online', 'Technology', 'Country', 'zero-carbon estimated normalized capacity [Nm³ H₂/hour]'])
 
 total_projects = len(df)
 
@@ -37,7 +37,7 @@ print("\nEnd products:")
 print(end_products)
 
 
-features = ['IEA zero-carbon estimated normalized capacity\n[Nm³ H₂/hour]', 'LOWE_CF']
+features = ['zero-carbon estimated normalized capacity [Nm³ H₂/hour]', 'LOWE_CF']
 
 scaler = StandardScaler()
 X = scaler.fit_transform(df[features])
@@ -46,7 +46,7 @@ kmeans = KMeans(n_clusters=5, random_state=42)
 df['Cluster'] = kmeans.fit_predict(X)
 
 plt.figure(figsize=(10, 6))
-sns.scatterplot(data=df, x='IEA zero-carbon estimated normalized capacity\n[Nm³ H₂/hour]', y='LOWE_CF', hue='Cluster', palette='deep')
+sns.scatterplot(data=df, x='zero-carbon estimated normalized capacity [Nm³ H₂/hour]', y='LOWE_CF', hue='Cluster', palette='deep')
 plt.title('Project Clusters')
 plt.xlabel('Normalized Capacity')
 plt.ylabel('Capacity Factor')
@@ -79,7 +79,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 X = df[['Date online', 'LOWE_CF']]
 X['Year'] = X['Date online'].dt.year
 X = X.drop('Date online', axis=1)
-y = df['IEA zero-carbon estimated normalized capacity\n[Nm³ H₂/hour]']
+y = df['zero-carbon estimated normalized capacity [Nm³ H₂/hour]']
 
 # تقسیم داده به مجموعه‌های آموزش و آزمون
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
