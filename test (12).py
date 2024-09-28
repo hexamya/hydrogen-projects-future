@@ -5,7 +5,7 @@ from sklearn.impute import SimpleImputer
 import seaborn as sns
 
 # Load the dataset
-df = pd.read_csv('hydrogen_projects.csv')
+df = pd.read_csv('hydrogen_projects_sample.csv')
 
 # Display the first few rows of the dataset
 print(df.head())
@@ -16,7 +16,7 @@ df_imputed = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
 
 # Encode categorical features
 label_encoders = {}
-categorical_cols = ['Project name', 'Country', 'Status', 'Technology', 'Technology_details',
+categorical_cols = ['Country', 'Status', 'Technology',
                     'Technology_electricity', 'Technology_electricity_details', 'Product']
 for col in categorical_cols:
     le = LabelEncoder()
@@ -24,8 +24,8 @@ for col in categorical_cols:
     label_encoders[col] = le
 
 # Select numerical features and normalize them
-numerical_cols = ['Capacity_MWel', 'Capacity_Nm³ H₂/h', 'Capacity_kt H2/y',
-                  'Capacity_t CO₂ captured/y', 'LOWE_CF']
+numerical_cols = ['Date online', 'Capacity_MWel', 'Capacity_Nm³ H₂/h', 'Capacity_kt H2/y',
+                  'Capacity_t CO₂ captured/y', 'zero-carbon estimated normalized capacity [Nm³ H₂/hour]']
 
 scaler = StandardScaler()
 df_imputed[numerical_cols] = scaler.fit_transform(df_imputed[numerical_cols])
@@ -35,10 +35,11 @@ print(df_imputed.head())
 
 
 features = [
-    # 'Country',
+    'Country',
     'Status',
     'Technology',
     'Technology_electricity',
+    'Technology_electricity_details',
     'Product',
     # 'EndUse_Refining',
     # 'EndUse_Ammonia',
@@ -54,12 +55,13 @@ features = [
     # 'EndUse_Synfuels',
     # 'EndUse_CH4 grid inj.',
     # 'EndUse_CH4 mobility',
-
+    'Date online',
     'Capacity_MWel',
     'Capacity_Nm³ H₂/h',
     'Capacity_kt H2/y',
-    'Capacity_t CO₂ captured/y',
-    'LOWE_CF'
+    # 'Capacity_t CO₂ captured/y',
+    'zero-carbon estimated normalized capacity [Nm³ H₂/hour]'
+    # 'LOWE_CF'
 ]
 
 X = df_imputed[features]
@@ -69,7 +71,7 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
 # Define a function to plot silhouette scores
-def plot_silhouette_scores(X, max_clusters=10):
+def plot_silhouette_scores(X, max_clusters=7):
     silhouette_scores = []
     cluster_range = range(2, max_clusters + 1)
     for n_clusters in cluster_range:
@@ -85,10 +87,10 @@ def plot_silhouette_scores(X, max_clusters=10):
     plt.show()
 
 # Plot silhouette scores to find the optimal number of clusters for k-means
-plot_silhouette_scores(X, max_clusters=10)
+plot_silhouette_scores(X, max_clusters=7)
 
 # Optimal number of clusters found from silhouette scores
-optimal_clusters = 3  # This could be adjusted based on silhouette scores
+optimal_clusters = 5  # This could be adjusted based on silhouette scores
 
 # Initialize and fit the k-means model
 kmeans = KMeans(n_clusters=optimal_clusters, random_state=42)
