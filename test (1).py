@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.tsa.arima.model import ARIMA
-from fbprophet import Prophet
 import numpy as np
 
 # Load the dataset
