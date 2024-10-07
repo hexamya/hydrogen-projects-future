@@ -5,20 +5,34 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import numpy as np
 
+
 # Load the dataset
 file_path = 'hydrogen_projects.csv'
 data = pd.read_csv(file_path)
 
+
 # Display the first few rows of the dataset
 print(data.head())
 
+
 # Data Preparation
 # Filter relevant columns for end-use analysis
-end_use_columns = ['EndUse_Refining', 'EndUse_Ammonia', 'EndUse_Methanol',
-                   'EndUse_Iron&Steel', 'EndUse_Other Ind', 'EndUse_Mobility',
-                   'EndUse_Power', 'EndUse_Grid inj.', 'EndUse_CHP',
-                   'EndUse_Domestic heat', 'EndUse_Biofuels', 'EndUse_Synfuels',
-                   'EndUse_CH4 grid inj.', 'EndUse_CH4 mobility']
+end_use_columns = [
+    'EndUse_Refining'
+    'EndUse_Ammonia',
+    'EndUse_Methanol',
+    'EndUse_Iron&Steel',
+    'EndUse_Other Ind',
+    'EndUse_Mobility',
+    'EndUse_Power',
+    'EndUse_Grid inj.',
+    'EndUse_CHP',
+    'EndUse_Domestic heat',
+    'EndUse_Biofuels',
+    'EndUse_Synfuels',
+    'EndUse_CH4 grid inj.',
+    'EndUse_CH4 mobility'
+]
 
 # Convert end-use columns to numerical values
 data[end_use_columns] = data[end_use_columns].applymap(lambda x: 0 if pd.isnull(x) else 1)
